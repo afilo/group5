@@ -1,0 +1,22 @@
+{
+    "_comment": "this will list production for 1 week",
+    "_comment1": "each day will be a different array listing product id and production",
+
+    "production" :[
+        {
+            "date" : "Date of production",
+            "daily_production" : [
+                {
+                    "p_id" : "product id",
+                    "daily_production" : "production magnitude"
+                },
+                {},
+                {},
+                {}
+            ]
+        },
+        {},
+        {},
+        {}
+    ]
+}

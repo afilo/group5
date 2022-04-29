@@ -1,0 +1,45 @@
+{
+    "Employee":
+    [
+        {
+            "unique_id": "Id to be used for faster querying",
+            "authentication":
+                {
+                    "username": "username of this employee",
+                    "password": "password of this employee"
+                },
+            "shifts":
+                [
+                    {
+                        "date": "date of this shift",
+                        "start": "starting hour of the shift",
+                        "end": "ending hour of the shift",
+                        "work_hours": "number of hours on this shift"
+                        
+                    }
+                ],
+            "_comment_orders_response": "list 10 latest orders that have been resolved by this employee",
+            "orders_response": 
+                [
+                    {
+                        "date": "date and hour of the response",
+                        "eta" : "estimated time for the order to be fulfilled",
+                        "customer_id": "id of the costumer that made the order",
+
+                        "order":
+                            {
+                                "unique_id": "id for this order",
+                                "date_created": "date and hour when the order was created",
+                                "cart" : [
+                                    {
+                                        "_comment" : "list all the products in the cart in this array"
+                                    }
+                                ]
+                            }
+                    }
+                ]
+                    
+                
+        }
+    ]
+}

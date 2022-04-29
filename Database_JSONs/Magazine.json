@@ -1,0 +1,21 @@
+{
+    "category1" :[
+        {
+            "p_name" : "general name of this product",
+            "_comment_package" : "main information listed under package type",
+            "package":[
+                {
+                    "p_id" : "id will be unique based on package size , not just product itself",
+                    "size": "size for this type of package",
+                    "price": "price for this type of package",
+                    "dimensions": "dimensions for this type of package",
+                    "quantity" : "quantity of this product inside the magazine"
+                }
+            ]
+        }
+    ],
+    "category2" : [],
+    "category3" : [],
+    "category4" : [],
+    "category5" : []
+}

@@ -1,0 +1,16 @@
+{
+    "authorization":{
+        "public_token" : "public token goes here",
+        "private_token" : "private token goes here"  
+    },
+
+    "logging_history":[
+        {
+            "_comment": "admin should have a logging history",
+            "_comment1": "this array should list latest logs",
+            
+            "date" : "date and hour on this certain log",
+            "log" : "general information on what happened"
+        }
+    ]
+}

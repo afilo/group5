@@ -1,0 +1,25 @@
+{
+    "orders":
+    [
+        {
+            "order_id": "unique order id",
+            "customer" : "customer name or public token",
+            "order_date" : "date of order",
+            "response" : {
+                "employee" : "employee that responded",
+                "answer" : "what employee decided to do",
+                "eta" : "time when the order can be shipped"
+            },
+            "cart" : [
+                {
+                    "_comment": "product name , description and other related stuff"
+                },
+                {},
+                {},
+                {}
+            ],
+            "price" : "total price of the order",
+            "special_request" : "special request for the order, if any is given"
+        }
+    ]
+}

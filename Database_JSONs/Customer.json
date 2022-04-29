@@ -1,0 +1,35 @@
+{  
+    "Customer":
+    [{
+        "unique_id" :"id to be used for faster query",
+        "Name": "Distributor name goes here",
+        "authentication":
+        {
+            "_comment":"these can be changed later depending on how the authentication will work",
+
+            "public_token": "token goes here",
+            "private_token": "private token goes here"
+        },
+        "active_orders" :
+        [
+            {
+                "_comment" : "Array with 10 latest orders",
+
+                "order_id": "generated id from the server goes here",
+                "created" : "date object",
+                "cart" : [
+                    {
+                        "_comment" : "listing of all the products on this order"
+                    }
+                    ]
+                
+            }
+        ],
+        "active_tickets" :[
+            {
+                "_comment" : "information related to this ticket"
+            }
+        ]
+        
+    }]
+}
