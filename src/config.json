@@ -1,0 +1,5 @@
+{
+    "host": "mongodb+srv://afilopati19:.Klevi123@cluster0.wwqj1sf.mongodb.net/test?authMechanism=DEFAULT",
+    "name":"clifford_systems",
+    "authMechanism" : "SCRAM-SHA-1"
+}
