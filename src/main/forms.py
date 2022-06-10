@@ -13,6 +13,14 @@ class EmployeeCreateForm(UserCreationForm):
         model = get_user_model()
         fields = ('name','email','phone','username','password1','password2')
 
+    def save(self, commit=True):    
+        user = super().save(commit=False)
+        user.is_employee = True
+
+        if commit:
+            user.save()
+        return user
+
 # class EmployeeSignUpForm(UserCreationForm):
 #     name = forms.CharField(max_length=50, required=True, label='Full Name')
 #     email = forms.EmailField(required=True, label="Email")

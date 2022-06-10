@@ -11,8 +11,6 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 
 # database
-# from database.models import Employees
-from database.serializers import EmployeeSerializer
 
 # decorators for forms
 from django.contrib.auth.forms import UserCreationForm
@@ -47,8 +45,12 @@ def create_employee(request):
         form = EmployeeCreateForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/employee/login')
+            return redirect(login_employee)
         msg = 'Error: Employee was not created!'
     else:
         form = EmployeeCreateForm()
     return render(request, 'employee/register.html', {'form': form, 'msg': msg})
+
+
+def login_emplyee(request):
+    return render(request, 'employee/login.html')

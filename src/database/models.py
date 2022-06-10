@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 
 class UserManager(BaseUserManager):
-    def create_employee(self, email, name, username, phone, password, is_employee=True , **extra_fields):
+    def create_employee(self, email, name, username, phone, password , **extra_fields):
         """Creates and saves a new user"""
         if not email:
             raise ValueError('Users must have an email address')
@@ -12,13 +12,15 @@ class UserManager(BaseUserManager):
             raise ValueError('Users must have a name')
         if not username:
             raise ValueError('Users must have a username')
+
+        extra_fields.setdefault('is_employee', True)
             
         user = self.model(
             email=self.normalize_email(email),
             name = name,
             username = username,
             phone = phone,
-            is_employee = is_employee,
+            is_employee = True,
             **extra_fields
             )
         user.set_password(password)
@@ -26,7 +28,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_customer(self, email, name, username, password, is_customer=True , **extra_fields):    
+    def create_customer(self, email, name, username, password , **extra_fields):    
         """Creates and saves a new user"""
         if not email:
             raise ValueError('Users must have an email address')
@@ -39,7 +41,7 @@ class UserManager(BaseUserManager):
             email=self.normalize_email(email),
             name = name,
             username = username,
-            is_customer = is_customer,
+            is_customer = True,
             **extra_fields
             )
         user.set_password(password)
@@ -48,13 +50,38 @@ class UserManager(BaseUserManager):
         return user
 
 
+    def create_user(self, email, name, username, password, **extra_fields):
+        """Creates and saves a new user"""
+        if not email:
+            raise ValueError('Users must have an email address')
+        if not name:
+            raise ValueError('Users must have a name')
+        if not username:
+            raise ValueError('Users must have a username')
+        
+        user = self.model(
+            email=self.normalize_email(email),
+            name = name,
+            username = username,
+            **extra_fields
+            )
+        user.set_password(password)
+        user.save()
 
-    def create_superuser(self, email, password):
+        return user
+
+
+    def create_superuser(self, email,name,username, password, **extra_fields):
+
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_staff', True)
+
+
         """Creates and saves a new superuser"""
-        user = self.create_user(email, password)
+        user = self.create_user(email, name, username, password, **extra_fields)
         user.is_staff = True
         user.is_superuser = True
-        user.save(using=self._db)
+        user.save()
 
         return user
 
@@ -65,6 +92,10 @@ class custom_User(AbstractBaseUser, PermissionsMixin):
     is_employee = models.BooleanField(default=False)
     is_customer = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    
     # entry data
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=100, unique=True)
