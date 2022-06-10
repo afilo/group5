@@ -11,6 +11,7 @@ djangorestframework = "*"
 djongo = "*"
 django-cors-headers = "*"
 pymongo = "==3.12.3"
+django-crispy-forms = "*"
 
 [dev-packages]
 

@@ -19,6 +19,11 @@ from django.urls import path, include, re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('employee/',include('employee.urls'), name="Employee Index"),
-    re_path(r'^', include('employee.urls')),
+    # path('employee/',include('employee.urls'), name="Employee Index"),
+    # re_path(r'^', include('employee.urls')),
+    path('', include('main.urls')),
 ]
+
+admin.site.site_header="Clifford Systems Administration"
+admin.site.site_title="Clifford Systems Administration"
+admin.site.index_title="Welcome to Clifford Systems Administration Site"

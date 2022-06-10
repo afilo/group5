@@ -1,5 +1,3 @@
 # database connections
 
-src/config.json
-
 src/db_configure.py
