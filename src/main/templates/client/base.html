@@ -26,19 +26,39 @@
         </button> {% endcomment %}
         <div class="float-right">
             <ul class="navbar-nav flex-row mr-5 mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link text-white" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Link</a>
-                </li>
+                {% if user.is_authenticated and user.is_employee %}
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="/employee">Employee Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/employee/profile">Profile</a>
+                    </li>
+                {% elif user.is_authenticated and user.is_client %}
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="/">Client Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/client/profile">Profile</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="/products">Browse</a>
+                    </li>
+                {% endif %}
+               
                 <li class="nav-item dropdown">
+                    {% if user.is_authenticated %}
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.name}}</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="/logout">Log Out</a>
+                    {% else %}
                     <a class="nav-link dropdown-toggle text-white" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Log In</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownId">
                         <a class="dropdown-item" href="/client/login">Client</a>
                         <a class="dropdown-item" href="/admin">Admin</a>
                         <a class="dropdown-item" href="/employee/login">Employee</a>
                     </div>
+                    {% endif %}
                 </li>
             </ul>
         </div>

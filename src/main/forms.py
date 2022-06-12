@@ -21,17 +21,15 @@ class EmployeeCreateForm(UserCreationForm):
             user.save()
         return user
 
-class EmployeeLoginForm(forms.ModelForm):
+class EmployeeLoginForm(forms.Form):
     email = forms.EmailField(max_length=100, required=True, label='Email')
     password = forms.CharField(widget=forms.PasswordInput)
-    class Meta:
-        model = get_user_model()
-        fields = ('email','password')
+
 
     def clean(self, *args, **kwargs):
-        cleaned_data = super().clean()
-        email = cleaned_data.get('email')
-        password = cleaned_data.get('password')
+        email = self.cleaned_data.get('email')
+        password = self.cleaned_data.get('password')
+
         if email and password:
             user = authenticate(email=email, password=password)
 

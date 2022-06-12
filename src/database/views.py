@@ -11,12 +11,15 @@ from main.decorators import employee_required
 
 
 @csrf_exempt
-def user_list(request):
+def user_list(request, pk=None):
     """
     List all users.
     """
     if request.method == 'GET':
-        users = get_user_model().objects.all()
+        if pk is not None:
+            users = get_user_model().objects.filter(id=pk)
+        else:
+            users = get_user_model().objects.all()
         serializer = UserSerializer(users, many=True)
         return JsonResponse(serializer.data, safe=False)
 

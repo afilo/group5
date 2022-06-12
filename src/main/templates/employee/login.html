@@ -19,20 +19,7 @@
                 <p>Employee</p>
             </div>
         </div>
-        {% comment %} <div class="container">
-            <div class="form-group">
-                {% if msg is not None %}
-                    <div class="alert alert-danger">{{ msg }}</div>
-                {% endif %}
-                <form action="#" method="post">
-                        {% csrf_token %}
-                        <p><label for="Email">Email: </label>{{form.email}}</p>
-                        <p><label for="Password">Password: </label>{{form.password}}</p>
-                    <button class="btn btn-primary" action="submit">Log In</button>
-                </form>
-            </div>
-        </div> {% endcomment %}
-        <form action="#" method="post">
+        <form method="post" class="form-group">
           {% csrf_token %}
             <div class="container py-5 h-100">
               <div class="row d-flex justify-content-center align-items-center h-100">
@@ -42,11 +29,6 @@
                       <table class="table">
                         {{form|crispy}}
                       </table>
-                      {% comment %} <div class="form-outline mb-4">
-                        <label class="form-label" for="password" placeholder="Password">Password</label>
-                        <input type="password" id="password" class="form-control form-control-lg">
-                      </div> {% endcomment %}
-          
                       <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
           
                     </div>

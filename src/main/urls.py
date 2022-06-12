@@ -4,16 +4,18 @@ from database import views as database_views
 
 
 urlpatterns = [
-    # re_path(r'^department$', views.departmentApi),
-    # re_path(r'^department/([0-9]+)$', views.departmentApi),
-    path('',views.index, name="HomePage"),
-    # re_path(r'^employees$', views.employeeApi),
-    # re_path(r'^employees/([0-9]+)$', views.employeeApi),
+    
     path('employee/', views.employee_home, name="Employee Index"),
-    path('employee/login', views.login_employee, name="Login"),
-    path('client/login', views.login_client, name="Login"),
+    path('employee/login', views.login_employee, name="Employee Login"),
     path('employee/create', views.create_employee, name="Create Employee"),
-    path('api/user', database_views.user_list, name="User List"),
-    path('client/login', views.login_client, name="Login"),
+    path('logout', views.logout_employee, name="Logout"),
+
+    path('',views.index, name="Home Page"),
+    path('client/login', views.login_client, name="Client Login"),
     path('client/create', views.create_client, name="Create Client"),
+    
+    # api endpoints
+    path('api/user', database_views.user_list, name="User List"),
+    path('api/user/<int:pk>', database_views.user_list, name="User Detail"),
+
 ]

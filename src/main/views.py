@@ -1,5 +1,5 @@
 
-from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth import get_user_model, authenticate, login, logout
 User = get_user_model()
 
 # normal methods for views
@@ -24,24 +24,30 @@ def login_client(request):
     return render(request, 'client/login.html')
 
 def login_employee(request):
-    msg = None
+    # if employee is already authenticated, redirect to employee home
+    if request.user.is_authenticated:
+        return redirect('/employee/')
+
+        
     if request.method == 'POST':
         form = EmployeeLoginForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            form.save()
-        #authenticate user
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
             user = authenticate(email=email, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect(employee_home)
-            msg = 'Error: Employee was not logged in!'
-    else:
-        form = EmployeeLoginForm()
-    return render(request, 'employee/login.html', {'form': form, 'msg': msg})
+            login(request, user)
+            return redirect("/employee/")
 
+    form = EmployeeLoginForm()
+    return render(request, 'employee/login.html', {'form': form})
 
+def logout_employee(request):
+    type = ''
+    if request.user.is_employee:
+        type = 'employee/'
+    
+    logout(request)
+    return redirect(f'/{type}login')
 
 
     #         if user is not None:
@@ -74,7 +80,7 @@ def create_employee(request):
         form = EmployeeCreateForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(login_employee)
+            return redirect('/employee')
         msg = 'Error: Employee was not created!'
     else:
         form = EmployeeCreateForm()

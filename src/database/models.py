@@ -156,17 +156,18 @@ class custom_User(AbstractBaseUser, PermissionsMixin):
 
 
 class Products(models.Model):
-    pass
-    # p_name = models.CharField(max_length=50) # name of the product within a category
-    # package_size = models.CharField(max_length=20) # package size of the product
-    # price = models.CharField(max_length=20) # price of the product
-    # dimensions = models.CharField(max_length=20) # dimensions of the product
-    # stock = models.CharField(max_length=20) # stock of the product
-    # image = models.ImageField(upload_to='products/') # image of the product
-    # category = models.CharField(max_length=20) # category of the product
+    
+    product_name = models.CharField(max_length=50) # name of the product within a category
+    product_id = models.AutoField(primary_key=True) # unique id for each product
+    package_size = models.CharField(max_length=20) # package size of the product
+    price = models.CharField(max_length=20) # price of the product
+    dimensions = models.CharField(max_length=20) # dimensions of the product
+    stock = models.CharField(max_length=20) # stock of the product
+    image = models.ImageField(upload_to='products/') # image of the product
+    category = models.CharField(max_length=20) # category of the product
 
-    # def __str__(self):
-    #     return self.p_name
+    def __str__(self):
+        return self.p_name
 
 class Production(models.Model):
     pass
