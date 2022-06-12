@@ -1,1 +1,23 @@
-{% extends 'employee/base.html' %}
+{% extends 'client/base.html' %}
+
+
+{% block title %}
+<title>Employee Index</title>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <p>Hello {{user.username}}</p>
+{% endif %}
+<p class="display-4">Welcome to employe main menu</p>
+
+{% if user.is_authenticated %}
+<p>You are logged in as {{ user.username }}</p>
+{% endif %}
+
+{% if user.is_employee %}
+<p>You are an Employee. </p>
+{% endif %}
+
+
+{% endblock %}

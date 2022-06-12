@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 
 class EmployeeCreateForm(UserCreationForm):
     
@@ -20,6 +20,28 @@ class EmployeeCreateForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class EmployeeLoginForm(forms.ModelForm):
+    email = forms.EmailField(max_length=100, required=True, label='Email')
+    
+    class Meta:
+        model = get_user_model()
+        fields = ('email','password')
+
+    def clean(self, *args, **kwargs):
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+        password = cleaned_data.get('password')
+        if email and password:
+            user = authenticate(email=email, password=password)
+
+            if not user:
+                raise forms.ValidationError('User does not exist')
+            if not user.check_password(password):
+                raise forms.ValidationError('Password is incorrect')
+        return super(EmployeeLoginForm, self).clean(*args, **kwargs)
+
+
 
 # class EmployeeSignUpForm(UserCreationForm):
 #     name = forms.CharField(max_length=50, required=True, label='Full Name')

@@ -12,38 +12,39 @@
     {% endblock %}
 </head>
 <body>
-<div class="form-row"><a href="/" class="display-4 text-decoration-none pl-1">Clifford Systems</a>
-<nav class="navbar navbar-expand navbar-light pt-4">
-    <form class="form-inline my-2 my-lg-0 float-right">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Log In</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a class="dropdown-item" href="/client/login">Client</a>
-                    <a class="dropdown-item" href="/admin">Admin</a>
-                    <a class="dropdown-item" href="/employee/login">Employee</a>
-                </div>
-            </li>
-        </ul>
+{% block navbar %}
+    <div class="">
+    <nav class="navbar navbar-light bg-dark justify-content-between pt-4 navbar-expand">
+        <a href="/" class="display-4 text-decoration-none pl-1">Clifford Systems</a>
+        {% comment %} <form class="form-inline my-2 my-lg-0 float-right">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>  {% endcomment %}
+        {% comment %} <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button> {% endcomment %}
+        <div class="float-right">
+            <ul class="navbar-nav flex-row mr-5 mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link text-white" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Log In</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" href="/client/login">Client</a>
+                        <a class="dropdown-item" href="/admin">Admin</a>
+                        <a class="dropdown-item" href="/employee/login">Employee</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
     </div>
-</nav>
-</div>
-
-    
+{% endblock %}
     {% block content %}
     {% endblock %}
 

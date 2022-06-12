@@ -1,11 +1,73 @@
 {% extends 'client/base.html' %}
 
-    
-    {% block content %}
 
-        <div class="container">
-           <p class="">Registered Successfuly</p>
+{% load crispy_forms_tags %}
 
+
+{% block title %}
+
+<title>Employee Login</title>
+{% endblock %}
+
+
+{% block content %}
+    <center>
+
+        <div class="row ">
+            <div class="col-md-12">
+                <p class="display-3">Log In</p>
+                <p>Employee</p>
+            </div>
         </div>
+        {% comment %} <div class="container">
+            <div class="form-group">
+                {% if msg is not None %}
+                    <div class="alert alert-danger">{{ msg }}</div>
+                {% endif %}
+                <form action="#" method="post">
+                        {% csrf_token %}
+                        <p><label for="Email">Email: </label>{{form.email}}</p>
+                        <p><label for="Password">Password: </label>{{form.password}}</p>
+                    <button class="btn btn-primary" action="submit">Log In</button>
+                </form>
+            </div>
+        </div> {% endcomment %}
+        <form action="#" method="post">
+          {% csrf_token %}
+            <div class="container py-5 h-100">
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                  <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                      <table class="table">
+                      {% for field in form %}
+                      <div class="form-outline mb-4">
+                        <tr>
+                        <td>{{ field.label }}</td> <td>{{ field }}</td>
+                      </tr>
+                        
+                        {% comment %} <label class="form-label" for="email" placeholder="Email">Email</label>
+                        <input type="email" id="email" class="form-control form-control-lg"> {% endcomment %}
+                      </div>
+                      {% endfor %}
+                      </table>
+                      {% comment %} <div class="form-outline mb-4">
+                        <label class="form-label" for="password" placeholder="Password">Password</label>
+                        <input type="password" id="password" class="form-control form-control-lg">
+                      </div> {% endcomment %}
+          
+                      <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+          
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+    </center>
+    
+{% endblock %}
 
-    {% endblock %}
+
+
+

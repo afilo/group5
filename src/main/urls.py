@@ -9,6 +9,7 @@ urlpatterns = [
     path('',views.index, name="HomePage"),
     # re_path(r'^employees$', views.employeeApi),
     # re_path(r'^employees/([0-9]+)$', views.employeeApi),
+    path('employee/', views.employee_home, name="Employee Index"),
     path('employee/login', views.login_employee, name="Login"),
     path('client/login', views.login_client, name="Login"),
     path('employee/create', views.create_employee, name="Create Employee"),
