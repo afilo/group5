@@ -7,7 +7,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
 
 # rest api methods for views
-from django.views.decorators.csrf import csrf_exempt
+# from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 
 # database
@@ -28,19 +28,32 @@ def login_employee(request):
     if request.method == 'POST':
         form = EmployeeLoginForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('email')
-            password = form.cleaned_data.get('password')
-            user = authenticate(email=username, password=password)
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            form.save()
+        #authenticate user
+            user = authenticate(email=email, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('/employee/')
-            else:
-                msg = 'Error: Invalid email or password!'
-        else:
-            msg = 'Error: Invalid email or password!'
+                return redirect(employee_home)
+            msg = 'Error: Employee was not logged in!'
     else:
         form = EmployeeLoginForm()
-        return render(request, 'employee/login.html', {'form': form, 'msg': msg})
+    return render(request, 'employee/login.html', {'form': form, 'msg': msg})
+
+
+
+
+    #         if user is not None:
+    #             login(request, user)
+    #             return redirect('/employee/')
+    #         else:
+    #             msg = 'Error: Invalid email or password!'
+    #     else:
+    #         msg = 'Error: Invalid email or password!'
+    # else:
+    #     form = EmployeeLoginForm()
+    #     return render(request, 'employee/login.html', {'form': form, 'msg': msg})
 
 # def create_employee(request):
 
@@ -72,3 +85,8 @@ def create_employee(request):
 
 def employee_home(request):
     return render(request, 'employee/index.html')
+
+
+def create_client(request):
+    return render(request, 'client/register.html')
+

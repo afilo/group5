@@ -4,21 +4,20 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 
 class UserManager(BaseUserManager):
-    def create_employee(self, email, name, username, phone, password , **extra_fields):
+    def create_employee(self, email, name, phone, password , **extra_fields):
         """Creates and saves a new user"""
         if not email:
             raise ValueError('Users must have an email address')
         if not name:
             raise ValueError('Users must have a name')
-        if not username:
-            raise ValueError('Users must have a username')
+        # if not username:
+        #     raise ValueError('Users must have a username')
 
         extra_fields.setdefault('is_employee', True)
             
         user = self.model(
             email=self.normalize_email(email),
             name = name,
-            username = username,
             phone = phone,
             is_employee = True,
             **extra_fields
@@ -28,20 +27,19 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_customer(self, email, name, username, password , **extra_fields):    
+    def create_client(self, email, name, password , **extra_fields):    
         """Creates and saves a new user"""
         if not email:
             raise ValueError('Users must have an email address')
         if not name:
             raise ValueError('Users must have a name')
-        if not username:
-            raise ValueError('Users must have a username')
+        # if not username:
+        #     raise ValueError('Users must have a username')
         
         user = self.model(
             email=self.normalize_email(email),
             name = name,
-            username = username,
-            is_customer = True,
+            is_client = True,
             **extra_fields
             )
         user.set_password(password)
@@ -50,19 +48,18 @@ class UserManager(BaseUserManager):
         return user
 
 
-    def create_user(self, email, name, username, password, **extra_fields):
+    def create_user(self, email, name, password, **extra_fields):
         """Creates and saves a new user"""
         if not email:
             raise ValueError('Users must have an email address')
         if not name:
             raise ValueError('Users must have a name')
-        if not username:
-            raise ValueError('Users must have a username')
+        # if not username:
+        #     raise ValueError('Users must have a username')
         
         user = self.model(
             email=self.normalize_email(email),
             name = name,
-            username = username,
             **extra_fields
             )
         user.set_password(password)
@@ -71,14 +68,14 @@ class UserManager(BaseUserManager):
         return user
 
 
-    def create_superuser(self, email,name,username, password, **extra_fields):
+    def create_superuser(self, email,name, password, **extra_fields):
 
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_staff', True)
 
 
         """Creates and saves a new superuser"""
-        user = self.create_user(email, name, username, password, **extra_fields)
+        user = self.create_user(email, name, password, **extra_fields)
         user.is_staff = True
         user.is_superuser = True
         user.save()
@@ -90,7 +87,7 @@ class UserManager(BaseUserManager):
 class custom_User(AbstractBaseUser, PermissionsMixin):
     # roles
     is_employee = models.BooleanField(default=False)
-    is_customer = models.BooleanField(default=False)
+    is_client = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -98,7 +95,7 @@ class custom_User(AbstractBaseUser, PermissionsMixin):
     
     # entry data
     email = models.EmailField(unique=True)
-    username = models.CharField(max_length=100, unique=True)
+    # username = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
@@ -106,7 +103,7 @@ class custom_User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name', 'username', ]
+    REQUIRED_FIELDS = ['name',]
 
     def __str__(self):
         return self.name

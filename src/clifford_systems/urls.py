@@ -22,6 +22,7 @@ urlpatterns = [
     # path('employee/',include('employee.urls'), name="Employee Index"),
     # re_path(r'^', include('employee.urls')),
     path('', include('main.urls')),
+
 ]
 
 admin.site.site_header="Clifford Systems Administration"

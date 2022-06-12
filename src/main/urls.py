@@ -14,4 +14,6 @@ urlpatterns = [
     path('client/login', views.login_client, name="Login"),
     path('employee/create', views.create_employee, name="Create Employee"),
     path('api/user', database_views.user_list, name="User List"),
+    path('client/login', views.login_client, name="Login"),
+    path('client/create', views.create_client, name="Create Client"),
 ]
