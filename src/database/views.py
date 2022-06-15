@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
+
+from rest_framework.parsers import JSONParser,MultiPartParser,FormParser
+from rest_framework.decorators import api_view, parser_classes
 #database and json serializers
 # from database.models import Employees , Customers , Products , Orders
-from database.serializers import UserSerializer
+from .models import Products
+from database.serializers import UserSerializer, ProductSerializer
 from django.contrib.auth import get_user_model
 
 from main.decorators import employee_required
@@ -22,6 +25,64 @@ def user_list(request, pk=None):
             users = get_user_model().objects.all()
         serializer = UserSerializer(users, many=True)
         return JsonResponse(serializer.data, safe=False)
+
+@api_view(['GET', 'POST','PUT'])
+@parser_classes((MultiPartParser,FormParser,))
+@csrf_exempt
+def product_list(request, pk=None):
+    """
+    GET: List all products
+    POST: Create a new product
+    PUT: Update a product
+    """
+    # any user, authenticated or not, can access this api
+    if request.method == 'GET':
+        if pk is not None:
+            products = Products.objects.filter(product_id=pk)
+        else:
+            products = Products.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    if request.method == "POST":
+    # only authenticated employees or admins can create products
+        serializer = ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            json = {
+                "error":False,
+                "message": "Succesfully added product"
+                }
+            return JsonResponse(json, status=200)
+        json = {
+            "error":True,
+            "message": "Error adding product"
+            }
+        return JsonResponse(json, status=400)
+   
+    # if request.method == "POST":
+    #     # only authenticated employees or admins can create products
+    #     if not request.user.is_authenticated and not (request.user.is_employee or request.user.is_admin):
+    #         data = JSONParser().parse(request)
+    #         serializer = ProductSerializer(data=data)
+    #         if serializer.is_valid():
+    #             serializer.save()
+    #             json = {
+    #                 "error":False,
+    #                 "message": "Succesfully added product"
+    #                 }
+    #             return JsonResponse(json, status=200)
+    #         json = {
+    #             "error":True,
+    #             "message": "Error adding product"
+    #             }
+    #         return JsonResponse(json, status=400)
+    #     json = {
+    #         "error":True,
+    #         "message": "You are not authorized to add products"
+    #         }
+    #     return JsonResponse(json, status=401)
+
 
 
 

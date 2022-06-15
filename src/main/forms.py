@@ -42,6 +42,16 @@ class EmployeeLoginForm(forms.Form):
 
 
 
+class AddProductForm(forms.Form):
+    title = forms.CharField(max_length=100, required=True, label='Title')
+    description = forms.CharField(max_length=100, label='Description')
+    price = forms.IntegerField(required=True, label='Price')
+    image = forms.ImageField(required=True, label='Image')
+    box_quantity = forms.IntegerField(required=True, label='Box Quantity')
+    box_weight = forms.IntegerField(required=True, label='Box Weight')
+    box_dimensions = forms.CharField(max_length=100, label='Box Dimensions')
+    stock = forms.IntegerField( label='Current Stock')
+
 # class EmployeeSignUpForm(UserCreationForm):
 #     name = forms.CharField(max_length=50, required=True, label='Full Name')
 #     email = forms.EmailField(required=True, label="Email")

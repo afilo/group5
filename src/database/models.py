@@ -1,8 +1,6 @@
 from djongo import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
-
-
 class UserManager(BaseUserManager):
     def create_employee(self, email, name, phone, password , **extra_fields):
         """Creates and saves a new user"""
@@ -156,18 +154,18 @@ class custom_User(AbstractBaseUser, PermissionsMixin):
 
 
 class Products(models.Model):
-    
-    product_name = models.CharField(max_length=50) # name of the product within a category
-    product_id = models.AutoField(primary_key=True) # unique id for each product
-    package_size = models.CharField(max_length=20) # package size of the product
-    price = models.CharField(max_length=20) # price of the product
-    dimensions = models.CharField(max_length=20) # dimensions of the product
-    stock = models.CharField(max_length=20) # stock of the product
-    image = models.ImageField(upload_to='products/') # image of the product
-    category = models.CharField(max_length=20) # category of the product
+    product_id = models.AutoField(primary_key=True) # id for a product
+    title = models.CharField(max_length=100) # title to show 
+    description = models.TextField() # description that shows under title
+    price = models.IntegerField() # price for this product
+    image = models.ImageField(upload_to='products/',default="nophoto.png") # images
+    box_quantity = models.IntegerField() # number of items in the box
+    box_weight = models.IntegerField() # weight of the box in grams
+    box_dimensions = models.CharField(max_length=100,default="-") # dimensions of the box
+    stock = models.IntegerField(default=0) # number of items in stock
 
     def __str__(self):
-        return self.p_name
+        return self.title
 
 class Production(models.Model):
     pass

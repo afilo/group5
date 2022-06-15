@@ -6,17 +6,21 @@
 {% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
+{% if user.is_authenticated and user.is_employee %}
     <p>Hello {{user.name}}</p>
-{% endif %}
 <p class="display-4">Welcome to employe main menu</p>
 
-{% if user.is_authenticated %}
 <p>You are logged in as {{ user.email }}</p>
-{% endif %}
 
-{% if user.is_employee %}
 <p>You are an Employee. </p>
+
+<p class="display-1">Menus:</p>
+<div class="container">
+    <ul>
+        <li><a href="/employee/products" class="text-decoration-none display-4">Products</a></li>
+
+    </ul>
+</div>
 {% endif %}
 
 <div>
