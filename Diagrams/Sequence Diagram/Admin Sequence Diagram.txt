@@ -1,0 +1,57 @@
+title Admin Sequence Diagram
+
+participant Admin
+participant Login Page
+participant Main Menu
+participant Employee Menu
+participant Client Menu
+participant Order Menu
+participant Magazine Stock
+participant Factory Production
+participant Technical Support Menu
+participant Server
+
+
+Admin->Login Page:login(email,password)
+Login Page->Server:validatedata()
+Server-->Login Page:getResponse()
+Login Page-->Main Menu:validateLogin()
+Admin->Main Menu:viewEmployeeStatistics(),viewAllOrders(), viewMagazineStock(),viewFactoryProduction(),viewEmployeeStatus(),viewClientStatus(),viewTechnicalProblems
+Main Menu->Server:loadData()
+Server-->Main Menu:getData()
+Admin->Main Menu:enterEmployeeMenu()
+Main Menu-->Employee Menu:connect()
+Order Menu-->Admin:
+Admin->Employee Menu:registerEmployee()
+Employee Menu->Server:updateData()
+Admin->Employee Menu:deleteEmployee()
+Employee Menu->Server:updateData()
+Server-->Employee Menu:
+Employee Menu-->Admin:
+Admin->Main Menu:enterClientMenu()
+Main Menu-->Client Menu:connect()
+Client Menu-->Admin:
+Admin->Client Menu:deleteClient()
+Client Menu->Server:updateData()
+Admin->Client Menu:changeClientInfo()
+Client Menu->Server:updateData()
+Server-->Client Menu:
+Client Menu-->Admin:
+Admin->Main Menu:enterTechnicalSupportMenu()
+Main Menu-->Technical Support Menu:connect()
+Admin->Technical Support Menu:changeClientIssueStatus()
+Technical Support Menu->Server:updateData()
+Server-->Technical Support Menu:
+Technical Support Menu-->Admin:
+Admin->Magazine Stock:clickProduct()
+Server<-Magazine Stock:sendRequest()
+Magazine Stock<--Server:getData()
+Magazine Stock-->Admin:
+Admin->Factory Production:clickProduct()
+Factory Production->Server:sendRequest()
+Server-->Factory Production:getData()
+Factory Production-->Admin:
+Admin->Main Menu:logout()
+Main Menu-->Server:disconnect()
+Server-->Login Page:redirect()
+Login Page-->Admin:
