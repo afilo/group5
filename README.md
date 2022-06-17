@@ -24,6 +24,15 @@ Now you need to clone the repository
 go inside the src file 
 > cd src/
 
+Now here create a file called db_configure.py
+Inside this file write:
+```
+host = "mongodb+srv://afilopati19:.Klevi123@cluster0.wwqj1sf.mongodb.net/test?authMechanism=DEFAULT"
+name = "clifford_systems"
+authMechanism = "SCRAM-SHA-1"
+
+django_secret_key = "django-insecure-omc9gh4#xa8+1uyp(%f&-0$y633e1r0m*4a5_*scnyn1fj3b#u"
+```
 now install all libraries needed with pipenv 
 >pipenv install
 All libraries are written inside the pipfile which pipenv uses to find what it needs to install
@@ -32,3 +41,16 @@ To run the server , simply run the command
 >python manage.py runserver
 
 At default settings it runs on port 8000 
+Employee account:
+Email: aosmani19@epoka.edu.al
+Password: klevi123
+
+Admin Account:
+
+Email: aldi@gmail.com 
+Password: klevi123
+
+Client Account:
+Email: kciko@gmail.com
+Password: klevi123
+
