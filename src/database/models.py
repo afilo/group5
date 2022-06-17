@@ -1,3 +1,4 @@
+from urllib import request
 from djongo import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
@@ -158,7 +159,7 @@ class Products(models.Model):
     title = models.CharField(max_length=100) # title to show 
     description = models.TextField() # description that shows under title
     price = models.IntegerField() # price for this product
-    image = models.ImageField(upload_to='products/',default="nophoto.png") # images
+    image = models.ImageField(null=True, blank=True, upload_to='images/') # images
     box_quantity = models.IntegerField() # number of items in the box
     box_weight = models.IntegerField() # weight of the box in grams
     box_dimensions = models.CharField(max_length=100,default="-") # dimensions of the box
@@ -175,37 +176,35 @@ class Production(models.Model):
 
 # create a cart class to hold a single data for the actual cart
 class Cart(models.Model):
-    pass
-    # product = models.EmbeddedField(Products, on_delete=models.CASCADE) # product in the cart
-    # quantity = models.IntegerField() # quantity of the product in the cart
-    # price = models.DecimalField(max_digits=10, decimal_places=2) # price of the product in the cart
+    product_id = models.IntegerField() # id for a product (refrences to the product)
+    quantity = models.IntegerField() # quantity of the product in the cart
+    price = models.DecimalField(max_digits=10, decimal_places=2) # price of the product in the cart
 
-    # class Meta:
-    #     abstract = True
+    class Meta:
+        abstract = True
 
 
 # orders will have this structure
 # this will also be used to create temporary carts with the DRAFTED option
 # if user logins and has a DRAFTED order, it will be loaded by default into the cart
 class Orders(models.Model):
-    pass
-    # ACCEPTEDED = 'AC'
-    # PENDING = 'PE'
-    # CANCELLED = 'CA'
-    # DRAFTED = 'DR'
+    ACCEPTEDED = 'AC'
+    PENDING = 'PE'
+    CANCELLED = 'CA'
+    DRAFTED = 'DR'
 
-    # customer = models.ArrayReferenceField(to=custom_User) # customer who placed the order
-    # employee = models.ArrayReferenceField(to=custom_User) # employee who processed the order
-    # date = models.DateField() # date of the order
-    # state = models.CharField(max_length=2, 
-    #     choices=[
-    #         (ACCEPTEDED, 'Accepted'),
-    #         (PENDING, 'Pending'),
-    #         (CANCELLED, 'Cancelled'),
-    #         (DRAFTED, 'Drafted')
-    #         ]) # state of the order
-    # cart = models.ArrayField(model_container=Cart) # array of products in the order
-    # total = models.CharField(max_length=20) # total price of the order
+    customer_id = models.IntegerField() # customer who placed the order
+    employee_id = models.IntegerField() # employee who processed the order
+    date = models.DateField(auto_now=True) # date of the order
+    state = models.CharField(max_length=2, 
+        choices=[
+            (ACCEPTEDED, 'Accepted'),
+            (PENDING, 'Pending'),
+            (CANCELLED, 'Cancelled'),
+            (DRAFTED, 'Drafted')
+            ]) # state of the order
+    cart = models.ArrayField(model_container=Cart) # array of products in the order
+    total = models.CharField(max_length=20) # total price of the order
 
-    # def __str__(self):
-    #     return self.cart
+    def __str__(self):
+        return self.cart

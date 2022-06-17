@@ -1,0 +1,71 @@
+{% extends 'client/base.html' %}
+
+{% block title %}
+    {{product.title}}
+{% endblock %}
+
+
+{% block content %}
+    {% block sidenav %}
+        {% if user.is_authenticated and user.is_client %}
+
+        <div class="row">
+            <div class="col-3 ">
+            <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="/" role="tab" aria-controls="home">Home</a>
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="/" role="tab" aria-controls="profile">Shop</a>
+            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="/profile" role="tab" aria-controls="messages">Profile</a>
+            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">History</a>
+            <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Contact us</a>
+            </div>
+        </div>
+        {% endif %}
+    {% endblock %}
+
+    <div class="col-9">
+        <div class="container p-3 my-3 border">
+        <div class="row">
+            
+          <div class="col-6">
+            <center>
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top  " src="{{product.image.url}}" alt="Card image cap">
+              <div class="card-body">
+                <div>
+                  <input id="numberInput" value="0"/><br><br>
+                  <button id="plusButton">+</button>
+                  <button id="minusButton">-</button>
+                </div>
+                <script>
+                  textInput = document.querySelector('#numberInput');
+                  plusButton = document.querySelector('#plusButton');
+                  minusButton = document.querySelector('#minusButton');
+                  plusButton.onclick = () => textInput.value = parseInt(textInput.value) + 1;
+                  minusButton.onclick = () => textInput.value = parseInt(textInput.value) - 1;  
+                </script>
+              </div>
+            </div>
+          </center>
+          </div>
+        <div class="col-6">
+                <h2>{{product.title}}</h2>
+                <p> {{product.description}}</p><br><br>
+                <p>Price
+                <input id="priceInput" value="{{product.price}}" readonly/></p>
+                <p>Weight
+                <input id="weightInput" value="{{product.box_weight}} gr" readonly/></p>
+                <p>Quantity in a box
+                <input id="quantityInput" value="{{product.box_quantity}}" readonly/></p>
+                <p>Box Dimensions
+                <input id="dimensionsInput" value="{{product.box_dimensions}}" readonly/></p><br><br>
+                <input class="btn btn-primary" type="submit" value="Add to Order">
+        </div>
+        
+    </div>
+        </div>
+      
+       
+    </div>
+
+
+{% endblock %}

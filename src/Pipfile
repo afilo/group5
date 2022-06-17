@@ -13,6 +13,7 @@ django-cors-headers = "*"
 pymongo = "==3.12.3"
 django-crispy-forms = "*"
 python-dateutil = "*"
+pillow = "*"
 
 [dev-packages]
 

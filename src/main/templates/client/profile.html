@@ -1,0 +1,66 @@
+{% extends 'client/base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Profile</title>
+{% endblock %}
+
+{% block content %}
+{% block sidenav %}
+    {% if user.is_authenticated and user.is_client %}
+
+    <div class="row">
+        <div class="col-3 ">
+        <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="/" role="tab" aria-controls="home">Home</a>
+        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="/" role="tab" aria-controls="profile">Shop</a>
+        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="/profile" role="tab" aria-controls="messages">Profile</a>
+        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">History</a>
+        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Contact us</a>
+        </div>
+    </div>
+    {% endif %}
+    
+    {% endblock %}
+<div class="col-9">
+    <div class="container p-3 my-3 border">
+    <div class="row">
+        
+    <div class="col-6">
+        <h2>Hello {{user.name}}, Welcome Back !</h2>
+
+        
+            <h3>Your Info</h1>
+            <p><b>Name</b></p>
+            <p>{{user.name}}</p>
+            <p><b>Email</b></p>
+            <p>{{user.email}}</p>
+            <p><b>Current Password</b></p>
+            <p>***********</p>
+          
+    </div>
+    <div class="col-6">
+        
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="{% static 'accounticon.jpg' %}" alt="Card image cap">
+              <div class="card-body">
+                <a href="#" class="btn btn-primary">Edit</a>
+              </div>
+            </div>
+          
+    </div>
+</div>
+    </div>
+  
+    <div class="container p-3 my-3 border">
+        <h2>Latest Orders</h2>
+        <a href="#">View all Orders</a>
+    </div>
+
+    <div class="container p-3 my-3 border">
+        <h2>Default <Address>Address</Address></h2>
+        <a href="#">{{user.address}}</a>
+    </div>
+</div>
+{% endblock %}

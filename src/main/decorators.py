@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
-def employee_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='employee/login'):
+def employee_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='/login'):
     '''
     Decorator for views that checks that the logged in user is an employee,
     redirecting to the log-in page if necessary.
@@ -18,7 +18,7 @@ def employee_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, lo
     return actual_decorator
 
 
-def admin_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='admin'):
+def admin_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='/admin'):
     '''
     Decorator for views that checks that the logged in user is an admin,
     redirecting to the log-in page if necessary.
@@ -32,7 +32,7 @@ def admin_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login
         return actual_decorator(function)
     return actual_decorator
 
-def client_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='login'):
+def client_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='/login'):
     '''
     Decorator for views that checks that the logged in user is a client,
     redirecting to the log-in page if necessary.

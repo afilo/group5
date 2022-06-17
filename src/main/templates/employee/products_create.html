@@ -9,6 +9,11 @@
 
     
 {% block content %}
+  {% if msg %}
+    <div class="alert alert-success">
+        {{ msg }}
+    </div>
+  {% endif %}
 <center>
 
     <div class="row ">
@@ -16,7 +21,7 @@
             <p class="display-3">Create New Product</p>
         </div>
     </div>
-    <form method="post" class="form-group" action="#">
+    <form method="POST" class="form-group" action="" enctype="multipart/form-data">
        {% csrf_token %}
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -35,6 +40,47 @@
         </div>
     </form>
 </center>
+<script>
 
+  title = document.querySelector('#id_title');
+  description = document.querySelector('#id_description');
+  price = document.querySelector('#id_price');
+  image = document.querySelector('#id_image');
+  box_quantity = document.querySelector('#id_box_quantity');
+  box_weight = document.querySelector('#id_box_weight');
+  box_dimensions = document.querySelector('#id_box_dimensions');
+  stock = document.querySelector('#id_stock');
+  submit = document.querySelector('#submit');
+
+  submit.addEventListener('click', function(e){
+    if(title.value == '' || description.value == '' || price.value == '' || image.value == '' || box_quantity.value == '' || box_weight.value == '' || box_dimensions.value == ''){
+      e.preventDefault();
+      alert('Please fill out all fields');
+    }
+    else{
+      var formdata = new FormData();
+      formdata.append("title", title.value);
+      formdata.append("description", description.value);
+      formdata.append("price", price.value);
+      formdata.append("image", image.files[0]);
+      formdata.append("box_quantity", box_quantity.value);
+      formdata.append("box_weight", box_weight.value);
+      formdata.append("box_dimensions", box_dimensions.value);
+      formdata.append("stock", stock.value);
+
+      var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        headers: {
+         'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+      };
+
+      fetch("http://127.0.0.1:8000/api/products", requestOptions)
+        .then(res => alert(res.json().message))
+    }
+  });
+
+</script>
 
 {% endblock %}

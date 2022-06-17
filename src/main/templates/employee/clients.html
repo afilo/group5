@@ -1,0 +1,63 @@
+{% extends 'client/base.html' %}
+
+{% block title %}
+<title>Clients</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                <h1>Clients
+                <a href="/employee/clients/create" class="btn btn-primary">New Client</a>
+
+                </h1>
+            </p>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>random name</td>
+                        <td>email@test.com</td>
+                        <td>+3558231039</td>
+                        <td>Rruga e Durrsit</td>
+                        <td>
+                            <a href="#" class="btn btn-primary">Edit</a>
+                            <a href="#" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% for client in clients %}
+                    <tr>
+                        <td>{{ client.name }}</td>
+                        <td>{{ client.email }}</td>
+                        <td>{{ client.phone }}</td>
+                        <td>{{ client.address }}</td>
+                        <td>
+                            <a href="/employee/clients/{{ client.id }}/edit" class="btn btn-primary">Edit</a>
+                            <a href="/employee/clients/{{ client.id }}/delete" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        
+    </div>
+</div>
+{% endblock %}

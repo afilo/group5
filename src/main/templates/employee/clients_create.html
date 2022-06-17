@@ -1,0 +1,33 @@
+{% extends 'client/base.html' %}
+
+
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+<title>Create Client</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if msg %}
+    <div class="alert alert-success">
+        {{ msg }}
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Create Client</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form|crispy}}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

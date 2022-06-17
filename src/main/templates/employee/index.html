@@ -1,33 +1,114 @@
 {% extends 'client/base.html' %}
 
+{% load static %}
 
 {% block title %}
 <title>Employee Index</title>
 {% endblock %}
 
 {% block content %}
-{% if user.is_authenticated and user.is_employee %}
-    <p>Hello {{user.name}}</p>
-<p class="display-4">Welcome to employe main menu</p>
-
-<p>You are logged in as {{ user.email }}</p>
-
-<p>You are an Employee. </p>
-
-<p class="display-1">Menus:</p>
-<div class="container">
-    <ul>
-        <li><a href="/employee/products" class="text-decoration-none display-4">Products</a></li>
-
-    </ul>
-</div>
-{% endif %}
-
-<div>
-    <div>
-        <div><p></p></div>
+<div class="row">
+    <div class="col-3">
+       <div class="list-group" id="list-tab" role="tablist">
+           <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Clients</a>
+           <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Register</a>
+           <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Daily Production</a>
+           <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Supply Order</a>
+           <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">View Supply Stock</a>
+           <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">View Product Stock</a>
+           
+       </div>
     </div>
-    <div></div>
+
+    <div class="col-9">
+        <div class="row">
+        <div class="col-lg-4 ">
+            <a href="/employee/clients">
+            <div class="card" style="width: 20rem;">
+                <button class="btn btn-default">
+              <img class="card-img-top" src="{% static 'clients.png' %}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Clients</h5>
+              </div>
+                </button>
+            </div>
+        </a>
+          </div>
+
+
+          <div class="col-lg-4 ">
+            <a href="/employee/clients/create">
+            <div class="card" style="width: 20rem;">
+                <button class="btn btn-default">
+              <img class="card-img-top" src="{% static 'register.png' %} "  alt="Card image cap" style="{width:30%}">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Register Clients</h5>
+              </div>
+            </button>
+            </div>
+            </a>
+          </div>
+
+          <div class="col-lg-4 ">
+            <a href="/employee/orders">
+            <div class="card" style="width: 20rem;">
+                <button class="btn btn-default">
+              <img class="card-img-top" src="{% static 'transaction icone.png' %}" alt="Card image cap" style="{width:30%}">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Transactions</h5>
+              </div>
+            </button>
+            </div>
+            </a>
+            <br>
+          </div>
+           
+
+          
+          <div class="col-lg-4 ">
+            <a href="/employee/factory">
+            <div class="card" style="width: 20rem;">
+                <button class="btn btn-default">
+              <img class="card-img-top" src="{% static 'Production.png' %}" alt="Card image cap" style="{width:30%}">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Input Daily Production</h5>
+              </div>
+            </button>
+            </div>
+            </a>
+          </div>
+          
+          <div class="col-lg-4 ">
+            <a href="/employee/orders">
+            <div class="card" style="width: 20rem;">
+                <button class="btn btn-default">
+              <img class="card-img-top" src="{% static 'Supplypng.png' %}" alt="Card image cap" style="{width:30%}">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Order Supplys</h5>
+
+              </div>
+            </button>
+            </div>
+            </a>
+          </div>
+
+          <div class="col-lg-4 ">
+            <a href="/employee/magazine">
+            <div class="card" style="width: 20rem;">
+                <button class="btn btn-default">
+              <img class="card-img-top" src="{% static 'warehouse (2).png' %}" alt="Card image cap" style="{width:30%}">
+              <div class="card-body">
+                <h5 class="card-title text-primary" >View Supply Stock</h5>
+              </div>
+            </button>
+            </div>
+            </a>
+          </div>
+        </div>
+
+       </div>
+     </div>
+
 </div>
 
 {% endblock %}
