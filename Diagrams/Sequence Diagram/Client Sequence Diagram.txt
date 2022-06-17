@@ -1,0 +1,21 @@
+title Client Sequence Diagram 
+
+participant Client
+participant Login Page
+participant Main Menu
+participant Server
+
+Client->Login Page:login(email,password)
+Login Page->Server:validateData()
+Login Page<--Server:getResponse()
+Login Page-->Main Menu:validateLogin()
+Client->Main Menu:selectProduct()
+Main Menu->Server:checkProductAvailability()
+Server-->Main Menu:getProductAvailability()
+Main Menu->Server:addToCart()
+Main Menu->Server:sendOrder()
+Main Menu<--Server:waitOrderConfirmation()
+Client->Main Menu:logout()
+Main Menu-->Server:clientLogout()
+Main Menu-->Login Page:redirect()
+Login Page-->Client:

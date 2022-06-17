@@ -1,0 +1,30 @@
+title Employee Sequence Diagram
+
+participant Employee
+participant Login Page
+participant Main Menu
+participant Register Client
+participant Order Menu
+participant Server
+
+
+Employee->Login Page:login(username,password)
+Login Page->Server:validatedata()
+Server-->Login Page:getResponse()
+Login Page-->Main Menu:validateLogin()
+Employee->Main Menu:viewProgress(),viewProductsStock(), viewDailyProduction(),viewOrderMenu()
+Main Menu->Server:loadData()
+Server-->Main Menu:getData()
+Employee->Main Menu:enterOrderMenu()
+Main Menu-->Order Menu:connect()
+Order Menu-->Employee:
+Employee->Order Menu:approveOrder()
+Order Menu->Server:updateData()
+Order Menu-->Main Menu:
+Employee->Register Client:enterNewClients()
+Register Client->Server:updateClientData()
+Server-->Register Client:
+Employee->Main Menu:logout()
+Main Menu-->Server:disconnect()
+Server-->Login Page:redirect()
+Login Page-->Employee:
